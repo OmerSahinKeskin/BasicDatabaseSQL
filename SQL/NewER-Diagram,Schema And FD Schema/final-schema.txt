@@ -1,0 +1,66 @@
+Students(_idnr_, name, login, program)
+    UNIQUE(IDNR, PROGRAM)
+    UNIQUE(LOGIN)
+program -> programs(p_name)
+
+department(_d_name _, dabbreviations)
+unique(dabbreviations)
+
+program(_p_name ,  p_abbreviations)
+
+Branches(_name_, _program_)
+
+Courses(_code_, name, credits, department)
+
+StudentBelongsTo(_s_idnr_, s_name , s_login) ,_p_name _,  _b_name_ )
+(p_name , b_name ) -> branches(p_name , b_name )
+(s_idnr,pname) -> students(idnr, program)
+
+Prerequisite(_course_, PREREQUISITE)
+PREREQUISITE -> courses(code)
+course -> courses(code)
+
+OfferedPrograms(_d_name_, p_name)
+p_name -> programs(p_name)
+d_name -> department(d_name)
+
+OfferedCourses(_course_, _d_name_)
+d_name -> department(d_name)
+course -> courses(code)
+
+LimitedCourses(_code_, capacity)
+ code → Courses.code
+
+StudentBranches(_student_, branch, program)
+ (student, progra,) → Students(idnr, program)
+ (branch, program) → Branches(name, program)
+
+Classifications(_name_)
+
+Classified(_course_, _classification_)
+ course → courses.code
+ classification → Classifications.name
+
+MandatoryProgram(_course_, _program_)
+ course → Courses.code
+
+MandatoryBranch(_course_, _branch_, _program_)
+ course → Courses.code
+ (branch, program) → Branches.(name, program)
+
+RecommendedBranch(_course_, _branch_, _program_)
+ course → Courses.code
+ (branch, program) → Branches.(name, program)
+
+Registered(_student_, _course_)
+ student → Students.idnr
+ course → Courses.code
+
+Taken(_student_, _course_, grade)
+ student → Students.idnr
+ course → Courses.code
+
+WaitingList(_student_, _course_, position)
+ UNIQUE (COURSE, POSITION)
+ student → Students.idnr
+ course → Limitedcourses.code 

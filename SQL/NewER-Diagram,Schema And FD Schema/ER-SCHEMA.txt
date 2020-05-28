@@ -1,0 +1,56 @@
+Department(_name_, abbreviations)
+unique(abbreviations)
+
+Program(_name_, abbreviations)
+
+Student(_IDNR_,name,login,branch, program)
+
+Branch(_name_, _program_)
+program -> program(name)
+
+courses(name, _code_, credits, department)
+department -> department(name)
+
+classified(_name_)
+
+classification(name, course)
+course-> courses(code)
+name -> classified(name)
+
+prerequsites(_COURSE_, PREREQUISITE)
+course -> course(code)
+PREREQUISITE->course(code)
+
+mandatoryprogram(_course_,_program_ )
+course->courses(code)
+
+mandatoryBranch(_course_,_branch_, _program_ )
+course -> courses(code)
+(program,branch) -> branches(program, branch)
+ 
+recomendedBranch(_name_, _program_)
+name ->branches(name)
+program -> program(name)
+
+studentchooses(_idnr_, _name_, _program_)
+idnr-> student(idnr)
+name -> branches(name)
+program -> program(names)
+
+taken(_name_, _course_, grade, credits)
+name->student(idnr)
+(course, credits) -> courses(code, credits)
+
+restricted(_Course_, capacity)
+course -> code
+
+studentbelongsto(_idnr_,name,_program_, _branch_)
+(idnr,name)-> student(idnr, name)
+program -> program(name)
+branch ->branch(name)
+
+offeredCourses(_code_, _department_)
+code->course(code)
+department -> department(name)
+
+
